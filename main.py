@@ -1,11 +1,9 @@
 import json
 import logging
 import os
-import matvey
 import common
 
 from aiogram import Bot, Dispatcher, types
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 token='6224320755:AAFulm89ICDa_dhR7DWRKo9L6N0ZVJlOGIA'
 
@@ -37,7 +35,6 @@ async def handler(event, context):
         dp = Dispatcher(bot)
         
         await common.register_handlers(dp)
-        await matvey.register_handlers(dp)
         await process_event(event, dp)
 
         return {'statusCode': 200, 'body': 'ok'}
