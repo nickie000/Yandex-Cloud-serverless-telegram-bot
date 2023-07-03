@@ -39,11 +39,11 @@ common_butts_for_QA_BOSS = InlineKeyboardButton('К Боссу', url='t.me/uhtoe
 
 # Клавиатура для Q&A
 common_butts_for_QA_start = InlineKeyboardMarkup(row_width=1).add(
-    common_butts_for_QA_Q1, 
-    common_butts_for_QA_Q2, 
-    common_butts_for_QA_Q3,
-    common_butts_for_QA_Q4
-)
+                                                                common_butts_for_QA_Q1, 
+                                                                common_butts_for_QA_Q2, 
+                                                                common_butts_for_QA_Q3,
+                                                                common_butts_for_QA_Q4)
+
 common_butts_for_QA_start.row(common_butts_for_QA_NONE, common_butts_for_ALL_ESCAPE)
 common_butts_for_QA_1 = InlineKeyboardMarkup(row_width=1).add(common_butts_for_QA_ESCAPE)
 common_butts_for_QA_BOSS_1 = InlineKeyboardMarkup(row_width=2).add(common_butts_for_QA_BOSS, common_butts_for_QA_ESCAPE)
@@ -56,7 +56,13 @@ html = types.ParseMode.HTML
     Город   | Очистить
     
 """
+
+
+
 """-----------------Основные команды------------------"""
+
+
+
 async def common_start(message: types.Message):
     await message.answer_sticker(sticker=r'CAACAgIAAxkBAAEJB_xkZySN5Yw4AAHohKX87rJ8YPGyBA0AAm8AA9vbfgABmVtQqHuTgHQvBA')
     await message.answer(f'Привет, <b>{message.from_user.full_name}</b>! Меня зовут Бот Тестировщик\nЯ создан для того, чтобы показать на что способен мой Босс, а также для тестирования твоего бота\n<i>(для этого мой <a href="tg://user?id=582180705">Босс</a> должен был сообщить <tg-spoiler>секретную команду</tg-spoiler></i>)', parse_mode=html, reply_markup=common_start_butt)
@@ -70,13 +76,21 @@ async def common_list_of_methods(callback: types.CallbackQuery):
     await callback.message.edit_text(f'📖 Мы вернулись к списку функций', reply_markup=common_start_butt)
 
 
+
 """---------------Команды Анкетирования---------------"""
+
+
+
 # Начало Анкетирования
 async def common_Questionnaire(callback: types.CallbackQuery):
     await callback.message.edit_text(f'Начинаем заполнение анкеты 📋\nНажимай на кнопки снизу, чтобы их заполнить инофрмацией =)\n<pre>Кнопки ниже пока не работают</pre>', reply_markup=common_butts_for_Questionnaire, parse_mode=html)
 
 
+
 """--------------------Команды Q&A--------------------"""
+
+
+
 # Начало Q&A
 async def common_QA(callback: types.CallbackQuery):
     await callback.message.edit_text(f'⁉️ Здесь собраны все вопросы, выбирайте какой Вас больше интересует и я сразу отвечу на него', reply_markup=common_butts_for_QA_start)
@@ -116,8 +130,8 @@ async def common_QA_Q4(callback: types.CallbackQuery):
     await callback.message.edit_text(
         f'☁️ Я могу сказать только про Яндекс.Облако\n' +
         f'Если Ваш бот не будет получать очень много сообщений от пользователей, то практически бесплатно, ' +
-        f'достаточно перевести на платежный счет минимальную сумму. Но, если к Вашему боту будут обращаться регулярно ' +
-        f'то мой Босс с Вами расчитает месечную стоимость хотсинга', reply_markup=common_butts_for_QA_1
+        f'достаточно перевести на платежный счет минимальную сумму. Но, если к Вашему боту будут обращаться регулярно, ' +
+        f'то мой Босс с Вами расчитает месячную стоимость хотсинга', reply_markup=common_butts_for_QA_1
     )
 
 
@@ -129,6 +143,7 @@ async def common_QA_ESC(callback: types.CallbackQuery):
 # Кнопка Не нашел вопрос
 async def common_QA_NONE(callback: types.CallbackQuery):
     await callback.message.edit_text(f'😉 Мой Босс сможет ответить на любой Ваш вопрос, осталось только нажать заветную кнопочку', reply_markup=common_butts_for_QA_BOSS_1)
+
 
 
 async def register_handlers(dp: Dispatcher):
@@ -144,7 +159,6 @@ async def register_handlers(dp: Dispatcher):
     dp.register_callback_query_handler(common_QA_Q2, lambda c: c.data == 'common_QA_Q2')
     dp.register_callback_query_handler(common_QA_Q3, lambda c: c.data == 'common_QA_Q3')
     dp.register_callback_query_handler(common_QA_Q4, lambda c: c.data == 'common_QA_Q4')
-
     dp.register_callback_query_handler(common_QA_ESC, lambda c: c.data == 'common_QA_ESC')
     dp.register_callback_query_handler(common_QA_NONE, lambda c: c.data == 'common_QA_NONE')
     

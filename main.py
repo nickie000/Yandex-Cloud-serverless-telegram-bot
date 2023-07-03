@@ -1,9 +1,8 @@
-import json
-import logging
-import os
-import common
+import json, logging, os
+import common, matvey
 
 from aiogram import Bot, Dispatcher, types
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 token='6224320755:AAFulm89ICDa_dhR7DWRKo9L6N0ZVJlOGIA'
 
@@ -26,15 +25,17 @@ async def process_event(event, dp: Dispatcher):
     await dp.process_update(update)
 
 
-async def handler(event, context):
+async def handler(event):
     """Yandex.Cloud functions handler."""
 
     if event['httpMethod'] == 'POST':
         # Bot and dispatcher initialization
         bot = Bot(token)
-        dp = Dispatcher(bot)
+        storage = MemoryStorage()
+        dp = Dispatcher(bot, storage=storage)
         
         await common.register_handlers(dp)
+        await matvey.register_handlers(dp)
         await process_event(event, dp)
 
         return {'statusCode': 200, 'body': 'ok'}
